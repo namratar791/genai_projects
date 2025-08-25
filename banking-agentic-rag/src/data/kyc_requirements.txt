@@ -1,0 +1,5 @@
+# KYC Requirements
+- Government-issued photo ID (passport, driver's license, state ID).
+- SSN or ITIN for U.S. persons.
+- Proof of address (utility bill, lease) issued within 90 days.
+- For business accounts: EIN, beneficial owner info per FinCEN CDD Rule (25%+ ownership).

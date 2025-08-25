@@ -1,0 +1,6 @@
+# General FAQ
+Q: What balances count toward monthly fee waiver?
+A: Combined average daily balance across checking and savings >= $1,500 or monthly direct deposit >= $500.
+
+Q: Daily ATM withdrawal limit?
+A: $1,000 for standard debit, $2,000 for premium. International withdrawals may incur a $5 fee + 3% FX markup.

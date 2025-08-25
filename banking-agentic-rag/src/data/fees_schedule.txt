@@ -1,0 +1,4 @@
+# Fees & Pricing
+- Domestic wire: $25 outgoing, $15 incoming.
+- International wire: $45 outgoing + FX spread, $20 incoming.
+- Overdraft: $34 per item, max 3 per day, fee waived if negative balance < $50 by 11:59pm ET.
