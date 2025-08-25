@@ -1,0 +1,35 @@
+Core Principles
+
+    Singleton Instances
+
+    RAGPipeline and LLM are singletons to avoid reloading embeddings or creating multiple LLM instances.
+
+    Memory Management
+
+    Short-term memory (ConversationBufferMemory) for recent turns.
+
+    Long-term memory (ConversationSummaryMemory) persisted to file/DB for cross-session context.
+
+    Query Routing & Relevance
+
+    A router node decides which search nodes to call based on the query content.
+
+    Query can call multiple nodes simultaneously (RAG, DB, Web).
+
+    Parallel & Async Execution
+
+    Each node runs asynchronously.
+
+    Nodes retry up to 2 times on failure.
+
+    Exceptions are caught, logged, and do not crash the workflow.
+
+    Sentiment & Ticketing Node
+
+    After collecting search results, sentiment is analyzed.
+
+    If negative/confidence low, a ticket is raised (Jira/other system).
+
+    Caching
+
+    LLM and RAG results cached in-memory to speed up repeated queries.
