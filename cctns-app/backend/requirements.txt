@@ -1,0 +1,13 @@
+
+fastapi==0.116.1
+langchain
+langchain-core
+langchain-text-splitters
+langgraph
+langsmith
+openai
+pydantic==2.11.7
+pydantic_core==2.33.2
+python-dotenv==1.1.1
+SQLAlchemy==2.0.42
+uvicorn==0.35.0
