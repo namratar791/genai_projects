@@ -1,0 +1,11 @@
+mat-card {
+    max-width: 800px;
+    margin: 40px 5px;
+    font-family: Arial, sans-serif;
+  }
+
+
+  mat-card-title {
+    font-weight: 600;
+    font-size: 20px;
+  }

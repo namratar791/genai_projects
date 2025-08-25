@@ -1,0 +1,121 @@
+<div class="chat-wrapper" [class.minimized]="minimized">
+    <div class="chat-header" (click)="toggleMinimize()">
+      <span>Smart voice based BOT</span>
+      <button mat-icon-button aria-label="Toggle minimize/maximize">
+        <mat-icon>{{ minimized ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}</mat-icon>
+      </button>
+    </div>
+  
+    <div class="chat-body" *ngIf="!minimized">
+      <mat-list class="messages-list">
+        <mat-list-item
+          *ngFor="let msg of messages"
+          [class.user]="msg.fromUser"
+          [class.bot]="!msg.fromUser"
+        >
+          <div *ngIf="msg.type === 'text'" class="message-content">
+            {{ msg.text }}
+            <span class="timestamp">{{ msg.timestamp | date: 'shortTime' }}</span>
+          </div>
+
+          <!-- If the message contains dbtResults, show table -->
+          <div *ngIf="msg.type === 'dbResults'" class="chat-table-message">
+            <table border="1" style="width: 100%; border-collapse: collapse;">
+              <thead>
+                <tr>
+                  <th>Case ID</th>
+                  <th>Crime Type</th>
+                  <th>Location</th>
+                  <th>Status</th>
+                  <th>Date Registered</th>
+                </tr>
+              </thead>
+              <tbody>
+                <ng-container *ngIf="hasResults(msg)">
+                  <tr *ngFor="let row of msg.dbResults">
+                    <td>{{ row?.caseId }}</td>
+                    <td>{{ row?.crime_type }}</td>
+                    <td>{{ row?.location }}</td>
+                    <td>{{ row?.status }}</td>
+                    <td>{{ row?.date_registered }}</td>
+                  </tr>
+                </ng-container>
+                <ng-container *ngIf="!hasResults(msg)">
+                  <tr>
+                    <td colspan="5">No records found for the given data</td>
+                  </tr>
+                </ng-container>
+              </tbody>
+            </table>
+          </div>
+          
+          
+
+
+
+        </mat-list-item>
+      </mat-list>
+  
+      <form class="input-container" (submit)="sendMessage()">
+        <mat-form-field class="input-field" appearance="outline" *ngIf="!recording">
+          <input
+            matInput
+            placeholder="Type a message..."
+            [(ngModel)]="messageInput"
+            name="message"
+            autocomplete="off"
+            [disabled]="loading"
+          />
+        </mat-form-field>
+  
+        <!-- Mic button toggles recording -->
+        <button
+          mat-icon-button
+          type="button"
+          color="accent"
+          aria-label="Start voice input"
+          *ngIf="!recording"
+          (click)="startRecording()"
+        >
+          <mat-icon>mic</mat-icon>
+        </button>
+
+        <div *ngIf="loading" class="loading-spinner"></div>
+  
+        <!-- Stop and Cancel buttons shown during recording -->
+        <div *ngIf="recording" class="recording-indicator">
+          <div class="pulse-circle"></div>
+          <span class="recording-text">Recording...</span>
+          <!-- <span class="timer">{{ recordingTime | date:'mm:ss' }}</span> -->
+        </div>
+        <button
+          mat-icon-button
+          type="button"
+          color="warn"
+          aria-label="Stop recording"
+          *ngIf="recording"
+          (click)="stopRecording()"
+        >
+          <mat-icon>stop</mat-icon>
+        </button>
+
+  
+        <button
+          mat-icon-button
+          type="button"
+          color="warn"
+          aria-label="Cancel recording"
+          *ngIf="recording"
+          (click)="cancelRecording()"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+
+  
+        <button mat-icon-button type="submit" aria-label="Send message" *ngIf="!recording && !loading" (click)="sendTextToServer()">
+          <mat-icon>send</mat-icon>
+        </button>
+      </form>
+    </div>
+  </div>
+  
